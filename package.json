@@ -1,0 +1,23 @@
+{
+  "name": "BikeRaspberry",
+  "version": "1.0.0",
+  "description": "Software for a raspberry pi in a bike",
+  "main": "index.js",
+  "dependencies": {
+    "pi-gpio": "^0.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BikeBlocks/BikeRaspberry.git"
+  },
+  "author": "Maxence Aïci",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BikeBlocks/BikeRaspberry/issues"
+  },
+  "homepage": "https://github.com/BikeBlocks/BikeRaspberry"
+}
