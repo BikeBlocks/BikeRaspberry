@@ -34,7 +34,7 @@ bike.pullValues = function() {
 }
 bike.refreshInterval = setInterval(function(){
 	bike.pullValues();
-},bike.settings.refreshRate)
+},1000/bike.settings.refreshRate)
 
 /* Express http Server */
 var express = require('express');
@@ -72,7 +72,7 @@ io.on('connection', function (socket) {
 	bike.emitter.emit('sendStatus',{reason:'welcome'});
 	
 	socket.on('settings', function (data) {
-		_.merge(bike.settings, bike.settings, data.settings);
+		_.assign(bike.settings, data.settings);
 		bike.emitter.emit('sendSettings',{reason:'update'});
 	});
 	
