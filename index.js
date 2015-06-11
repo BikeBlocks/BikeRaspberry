@@ -60,7 +60,7 @@ io.on('connection', function (socket) {
 		});
 	});
 	
-	bike.emit('sendStatus',{welcome:true});
+	bike.emitter.emit('sendStatus',{welcome:true});
 	
 	socket.on('settings', function (data) {
 		_.merge(bike.settings, bike.settings, data.settings)
