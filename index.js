@@ -11,7 +11,8 @@ var bike = {
 		blinkingLeft: false
 	},
 	settings: {
-		wheelDiameter: 50
+		wheelDiameter: 50,
+		refreshRate:4
 	},
 	emitter: new EventEmitter()
 };
@@ -25,8 +26,15 @@ if (bike.dummy) {
 	var speed = require("./lib/speed.js");
 	var lights = require("./lib/lights.js");
 }
-
-
+bike.pullValues = function() {
+	bike.status.speed = speed.speed();
+	bike.status.acceleration = gyro.acceleration();
+	bike.status.inclination = gyro.inclination();
+	// TODO : Pull lights values
+}
+bike.refreshInterval = setInterval(function(){
+	bike.pullValues();
+},bike.settings.refreshRate)
 
 /* Express http Server */
 var express = require('express');
@@ -60,10 +68,19 @@ io.on('connection', function (socket) {
 		});
 	});
 	
-	bike.emitter.emit('sendStatus',{welcome:true});
+	bike.emitter.emit('sendSettings',{reason:'welcome'});
+	bike.emitter.emit('sendStatus',{reason:'welcome'});
 	
 	socket.on('settings', function (data) {
-		_.merge(bike.settings, bike.settings, data.settings)
+		_.merge(bike.settings, bike.settings, data.settings);
+		bike.emitter.emit('sendSettings',{reason:'update'});
 	});
+	
+	socket.on('settingsRequest', function (data) {
+		bike.emitter.emit('sendSettings',{reason:'request'});
+	});		
+	socket.on('statusRequest', function (data) {
+		bike.emitter.emit('sendStatus',{reason:'request'});
+	});	
 
 });
