@@ -17,7 +17,7 @@ rivets.binders.color = function(el, value) {
 	el.style.color = value ? '#76ff03' : '#c5cae9';
 }
 rivets.binders.rotate = function(el, value) {
-	$(el).css('transform',"rotate(-"+value+"deg)");
+	$(el).css('transform',"rotate("+(-1*value)+"deg)");
 	
 }
 

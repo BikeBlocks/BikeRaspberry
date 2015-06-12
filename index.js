@@ -29,11 +29,12 @@ if (bike.dummy) {
 }
 bike.pullValues = function() {
 	bike.status.speed = speed.speed();
-	bike.status.inclination = gyro.inclination();
+	bike.status.inclination = Math.round(gyro.inclination());
 	bike.status.braking = gyro.braking();
 	bike.status.blinkingLeft = lights.left() && (!bike.status.braking);
 	bike.status.blinkingRight = lights.right() && (!bike.status.braking);
 	bike.status.noLights = ! (bike.status.blinkingRight || bike.status.blinkingLeft || bike.status.braking)
+	lights.braking(bike.status.braking);
 }
 bike.refreshInterval = setInterval(function(){
 	bike.pullValues();
