@@ -56,7 +56,7 @@ h1 {
 	letter-spacing: .3rem;
 }
 .blink {
-    animation: blink .75s linear infinite;
+    animation: blink 1s linear infinite;
 }
 @keyframes blink {
     0% { opacity: 1; }

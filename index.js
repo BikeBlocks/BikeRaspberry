@@ -1,11 +1,11 @@
 var _ = require('lodash');
 var EventEmitter = require('events').EventEmitter;
 var bike = {
-	dummy: true,
+	dummy: false,
 	status: {
 		speed: 1337,
 		inclination: 42,
-		acceleration: 0.42,
+		acceleration: 0,
 		braking: false,
 		blinkingRight: false,
 		blinkingLeft: false,
@@ -29,9 +29,11 @@ if (bike.dummy) {
 }
 bike.pullValues = function() {
 	bike.status.speed = speed.speed();
-	bike.status.acceleration = gyro.acceleration();
 	bike.status.inclination = gyro.inclination();
-	// TODO : Pull lights values
+	bike.status.braking = gyro.braking();
+	bike.status.blinkingLeft = lights.left() && (!bike.status.braking);
+	bike.status.blinkingRight = lights.right() && (!bike.status.braking);
+	bike.status.noLights = ! (bike.status.blinkingRight || bike.status.blinkingLeft || bike.status.braking)
 }
 bike.refreshInterval = setInterval(function(){
 	bike.pullValues();
