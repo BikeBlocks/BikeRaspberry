@@ -3,34 +3,45 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Test App</title>
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.1/css/foundation.min.css">
+	<link rel="stylesheet" href="/css/foundation.min.css">
 	<link rel="stylesheet" href="/css/roboto.css">
+	<link rel="stylesheet" href="/css/ionicons.min.css">
 	<link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-	<h1>BikeBlocks Test page</h1>
-	<table id="bike">
-		<tr>
-			<td>Connected</td>
-			<td class="connection meter">{ connected }</td>
-		</tr>	
-		<tr>
-			<td>Speed</td>
-			<td class="speed meter">{ status.speed }</td>
-		</tr>
-		<tr>
-			<td>Inclination</td>
-			<td class="inclinaison meter">{ status.inclination }</td>
-		</tr>
-		<tr>
-			<td>Acceleration</td>
-			<td class="acceleration meter">{ status.acceleration }</td>
-		</tr>
-		<tr>
-			<td>Lights Status</td>
-			<td class="lights meter">L:{status.blinkingLeft} R:{status.blinkingRight}</td>
-		</tr>		
-	</table>
+	<div class="row topbar bike">
+		<div class="small-8 small-offset-2 columns">
+			<h1>BikeBlocks</h1>
+		</div>
+		<div class="small-2 columns">
+			<i class="ion-flash right" rv-color="connected"></i>
+		</div>
+	</div>
+	<div class="row speed bike">
+		<p class="speedMeter">{status.speed}</p>
+		<p class="speedLegend">km/h</p> 
+	</div>
+	<div class="row stats bike">
+		<div class="small-6 columns">
+			<div class="wrapicon" rv-rotate="status.inclination"><i class="ion-android-bicycle" ></i></div>
+			<p class="inclinationMeter">{ status.inclination }°</p>
+		</div>
+		<div class="small-6 columns lights">
+			<div class="wrapicon">
+				<i rv-show="status.noLights" class="ion-ios-circle-outline"></i>
+				<i rv-show="status.blinkingLeft" class="ion-ios-arrow-back blink"></i>
+				<i rv-show="status.blinkingRight"  class="ion-ios-arrow-forward blink"></i>
+				<i rv-show="status.braking" class="ion-ios-circle-filled"></i>
+
+			</div>
+			<p class="lightsMeter">
+				<span rv-show="status.noLights">Tous feux éteints</span>
+				<span rv-show="status.blinkingLeft">Clignotant Gauche</span>
+				<span rv-show="status.blinkingRight">Clignotant Droit</span>
+				<span rv-show="status.braking">Arrêt</span>
+			</p>
+		</div>		
+	</div>	
 <script src="/js/lodash.min.js"></script>
 <script src="/js/jquery-2.1.4.js"></script>
 <script src="/js/rivets.bundled.min.js"></script>

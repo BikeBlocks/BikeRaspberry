@@ -5,29 +5,43 @@ var bike = {
 		acceleration: 0,
 		braking: false,
 		blinkingRight: false,
-		blinkingLeft: false
+		blinkingLeft: false,
+		noLights:false
 	},
 	settings: {
 		refreshRate: 4
 	},
 	connected: false
 };
+rivets.binders.color = function(el, value) {
+	el.style.color = value ? '#76ff03' : '#c5cae9';
+}
+rivets.binders.rotate = function(el, value) {
+	$(el).css('transform',"rotate(-"+value+"deg)");
+	
+}
 
-rivets.bind($('#bike'), bike)
+rivets.bind($('.bike'), bike)
 
-var socket = io.connect('http://localhost:3000');
+
+var socket = io.connect('http://' + window.location.host);
 var status = {};
 
 socket.on('connect', function (data) {
 	bike.connected = true;
-	setInterval(function(){
+	bike.pullInterval = setInterval(function(){
 		socket.emit("statusRequest");
 	},1000/bike.settings.refreshRate)
 });
 
+socket.on('disconnect', function (data) {
+	bike.connected = false;
+	clearInterval(bike.pullInterval)
+});
+
 socket.on('status', function (data) {
-	console.log("Status received");
-	console.log(data);
+	//console.log("Status received");
+	//console.log(data);
 	_.assign(bike.status,data.status)
 });
 

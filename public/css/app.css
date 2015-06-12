@@ -1,0 +1,71 @@
+body,h1,h2,h3,h4,h5,h6,p,a,* {
+	font-family: "Roboto",sans-serif;
+}
+h1 {
+	font-family: "Roboto",sans-serif;
+	text-align: center;
+}
+.topbar h1 {
+	font-size: 1.25rem;
+	color: white;
+	line-height: 2.5;
+	margin: 0;
+}
+.topbar {
+	background-color: #3f51b5;
+	max-width: none;
+}
+.topbar i {
+	color: #c5cae9;
+	font-size: 1.25rem;
+	line-height: 2.5;
+	
+}
+.topbar .little{
+	font-size: .9rem;
+	padding-left: .9rem;
+}
+
+.speedMeter {
+	font-size: 5rem;
+	font-weight: 200;
+	text-align: center;
+	margin-bottom: 0;
+	margin-top: 2.5rem;
+	line-height: 1;
+}
+.speedLegend {
+	text-align: center;
+	font-size: 1rem;
+	letter-spacing: .3rem;
+}
+.stats i {
+	font-size: 3rem;
+
+}
+.wrapicon {
+	width: 3rem;
+	transform: rotate(0deg);
+	transition: transform .25s;
+	margin-left: auto;
+	margin-right: auto;
+}
+.inclinationMeter {
+	text-align: center;
+	font-size: 1.25rem;
+	letter-spacing: .3rem;
+}
+.blink {
+    animation: blink .75s linear infinite;
+}
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+.lightsMeter {
+	text-align: center;
+	font-size: 1.25rem;
+	letter-spacing: .05rem;
+}

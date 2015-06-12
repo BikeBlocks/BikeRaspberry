@@ -8,7 +8,8 @@ var bike = {
 		acceleration: 0.42,
 		braking: false,
 		blinkingRight: false,
-		blinkingLeft: false
+		blinkingLeft: false,
+		noLights:true
 	},
 	settings: {
 		wheelDiameter: 50,
